@@ -204,7 +204,7 @@ export default function AboutSection() {
             </motion.div>
 
             {/* Floating stats card */}
-            <motion.div
+            {/* <motion.div
               variants={statsCard}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
@@ -234,7 +234,7 @@ export default function AboutSection() {
                   Projects Delivered
                 </p>
               </div>
-            </motion.div>
+            </motion.div> */}
 
             {/* Decorative pulsing rings */}
             {[0, 1.2].map((delay, i) => (

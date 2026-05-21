@@ -99,7 +99,7 @@ export default function HeroSection() {
         "
       >
         {/* ── Stat Card ── */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.8 }}
@@ -124,7 +124,7 @@ export default function HeroSection() {
             Premium residential and commercial properties tailored to your
             lifestyle and investment goals.
           </p>
-        </motion.div>
+        </motion.div> */}
 
         {/* ── Image Panel ── */}
         <motion.div

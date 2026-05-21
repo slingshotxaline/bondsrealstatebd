@@ -38,12 +38,12 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-8 h-8 relative">
               <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M4 18L18 4L32 18V32H22V22H14V32H4V18Z" stroke="#8B5E3C" strokeWidth="2" fill="none"/>
-                <path d="M10 18L18 10L26 18" stroke="#8B5E3C" strokeWidth="1.5" fill="none"/>
+                <path d="M4 18L18 4L32 18V32H22V22H14V32H4V18Z" stroke="#004835" strokeWidth="2" fill="none"/>
+                <path d="M10 18L18 10L26 18" stroke="#004835" strokeWidth="1.5" fill="none"/>
               </svg>
             </div>
             <span className="text-[22px] font-semibold text-gray-900 tracking-tight">
-              Bonds Real State BD
+              Bonds RSB
             </span>
           </Link>
 
@@ -53,7 +53,7 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-[13.5px] text-gray-600 hover:text-[#8B5E3C] transition-colors duration-200 font-medium whitespace-nowrap"
+                className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-medium whitespace-nowrap"
               >
                 {link.label}
               </Link>
@@ -64,7 +64,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               href="#contact"
-              className="hidden sm:inline-flex items-center gap-2 bg-[#8B5E3C] hover:bg-[#7a5235] text-white text-[13.5px] font-medium px-5 py-2.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-[#8B5E3C]/20"
+              className="hidden sm:inline-flex items-center gap-2 bg-[#004835] hover:bg-[#7a5235] text-white text-[13.5px] font-medium px-5 py-2.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-[#004835]/20"
             >
               Get a Quote
             </Link>
@@ -102,7 +102,7 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block py-3 text-gray-700 hover:text-[#8B5E3C] font-medium border-b border-gray-50 last:border-0 text-[15px]"
+                    className="block py-3 text-gray-700 hover:text-[#004835] font-medium border-b border-gray-50 last:border-0 text-[15px]"
                   >
                     {link.label}
                   </Link>
@@ -111,7 +111,7 @@ export default function Navbar() {
               <Link
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-3 inline-flex justify-center bg-[#8B5E3C] text-white text-[14px] font-medium px-5 py-3 rounded-full"
+                className="mt-3 inline-flex justify-center bg-[#004835] text-white text-[14px] font-medium px-5 py-3 rounded-full"
               >
                 Get a Quote
               </Link>

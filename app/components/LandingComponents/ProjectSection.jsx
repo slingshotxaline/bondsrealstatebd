@@ -15,7 +15,7 @@ const properties = [
     parking: "Yes",
     location: "Sector-13, Jolshiri Abashon",
     mainImg: "/assets/LandingProject/UKhanProject/UKhan1.jpg",
-    thumbImg: "/assets/LandingProject/UKhanProject/UKhan2.jpg",
+    thumbImg: "/assets/LandingProject/UKhanProject/Ukhan2.jpg",
   },
   {
     id: 2,

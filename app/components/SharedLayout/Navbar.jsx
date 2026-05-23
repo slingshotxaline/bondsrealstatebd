@@ -149,7 +149,7 @@ export default function Navbar() {
               About Us
             </Link>
             <Link
-              href="#team"
+              href="/management-team"
               className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
             >
               Management Team

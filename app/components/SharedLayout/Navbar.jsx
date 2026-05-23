@@ -143,6 +143,12 @@ export default function Navbar() {
             </div>
 
             <Link
+              href="#ourconcerns"
+              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
+            >
+              Our Concerns
+            </Link>
+            <Link
               href="#about"
               className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
             >

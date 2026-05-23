@@ -211,12 +211,13 @@ export default function ContactSection() {
               <div className="h-40 relative overflow-hidden">
                 <iframe
                   title="Location Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d38356.25!2d-6.27!3d53.34!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTPCsDIwJzI0LjAiTiA2wrAxNicxMi4wIlc!5e0!3m2!1sen!2s!4v1"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.781075080008!2d90.40164109999999!3d23.790808999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c712aec672ed%3A0x63ad07e3e635e3b1!2sSky%20Logistics%20(BD)%20Limited!5e0!3m2!1sen!2sbd!4v1779535166247!5m2!1sen!2sbd"
                   className="w-full h-full"
                   style={{ border: 0, filter: "grayscale(0.2)" }}
                   allowFullScreen
                   loading="lazy"
                 />
+                
               </div>
               <div className="p-4 grid grid-cols-2 gap-4" style={{ background: "rgba(255,255,255,0.95)" }}>
                 <div>

@@ -75,7 +75,7 @@ export default function FilterSidebar({ filters, setFilters, onSearch, onClear }
         {/* Purpose */}
         <Section id="purpose" label="Purpose" openSections={openSections} toggle={toggle}>
           <div className="flex gap-2">
-            {['all', 'rent', 'sale'].map(p => (
+            {['all', 'rent', 'sale',"buy"].map(p => (
               <button
                 key={p}
                 onClick={() => setFilters(prev => ({ ...prev, purpose: p }))}

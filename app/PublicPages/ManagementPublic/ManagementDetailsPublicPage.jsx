@@ -374,7 +374,7 @@ export default function ManagementTeamPage() {
               ([num, label]) => (
                 <div key={label}>
                   <p
-                    className="text-[#004835]  font-extrabold m-0 leading-none mb-1"
+                    className="text-[#004835]  font-extrabold m-0 leading-none mb-1 text-center"
                     style={{ fontFamily: "'', serif", fontSize: 32 }}
                   >
                     {num}

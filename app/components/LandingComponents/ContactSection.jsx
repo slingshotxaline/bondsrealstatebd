@@ -226,7 +226,7 @@ export default function ContactSection() {
                     <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-[#004835]" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
                     </svg>
-                    <span>Holland Park Holland,<br />London 7QU</span>
+                    <span>House# 5 (2nd Floor), Road# 7, Block# F, <br />Banani, Dhaka-1213.</span>
                   </div>
                 </div>
                 <div className="border-l border-gray-200 pl-4">
@@ -237,7 +237,7 @@ export default function ContactSection() {
                       <rect x="2" y="4" width="20" height="16" rx="2" />
                       <path d="M2 7l10 7 10-7" />
                     </svg>
-                    <span>example@gmail.com<br />info8797@gmail.com</span>
+                    <span> info@bondsinternationalltd.com<br /> +88 02 55041896, 02 226603195</span>
                   </div>
                 </div>
               </div>

@@ -501,10 +501,12 @@ export default function Footer() {
               style={{ fontFamily: "sans-serif" }}
             >
               {[
-                "+175 005-0088",
-                "needhelp@company.com",
-                "1901 Thornridge Cir. Shiloh",
-                "Hawaii 81063",
+                "+88 02 55041896,",
+                " 02 226603195",
+                "+8801700764494",
+                "info@bondsinternationalltd.com",
+                "House# 5 (2nd Floor), Road# 7, Block# F,",
+                "Banani, Dhaka-1213.",
               ].map((line, i) => (
                 <motion.p
                   key={i}

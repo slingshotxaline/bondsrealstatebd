@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const propertySolutions = [
-  { label: "Property Buy/Sell", href: "#property", icon: "🏠" },
+  { label: "Property Buy/Sell", href: "property-buy-sell", icon: "🏠" },
   { label: "Property Management", href: "#services", icon: "🔑" },
   { label: "Property Development", href: "#development", icon: "🏗️" },
 ];

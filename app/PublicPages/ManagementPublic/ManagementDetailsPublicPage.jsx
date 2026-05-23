@@ -305,12 +305,12 @@ export default function ManagementTeamPage() {
   const [selected, setSelected] = useState(null);
 
   return (
-    <main className="min-h-screen bg-[#f4f2ed]" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <main className="min-h-screen bg-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap');`}</style>
 
       {/* ── Banner ── */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-[#000000] to-[#000000]" />
+        <div className="absolute inset-0 bg-[#f4f2ed]" />
         <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full bg-[#004835] opacity-[0.08]" />
         <div className="absolute bottom-8 -left-14 w-56 h-56 rounded-full bg-[#004835] opacity-[0.07]" />
         <div
@@ -342,7 +342,7 @@ export default function ManagementTeamPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-white font-extrabold leading-[1.1] mb-4 m-0"
+            className="text-black font-extrabold leading-[1.1] mb-4 m-0"
             style={{
               fontFamily: "'Playfair Display', serif",
               fontSize: "clamp(38px, 6vw, 68px)",
@@ -358,7 +358,7 @@ export default function ManagementTeamPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-white/65 text-base leading-[1.75] max-w-md mb-9"
+            className="text-black text-base leading-[1.75] max-w-md mb-9"
           >
             Guided by purpose, driven by impact — the visionaries shaping a better Bangladesh through strategy, empathy, and innovation.
           </motion.p>
@@ -374,12 +374,12 @@ export default function ManagementTeamPage() {
               ([num, label]) => (
                 <div key={label}>
                   <p
-                    className="text-[#004835] font-extrabold m-0 leading-none mb-1"
-                    style={{ fontFamily: "'Playfair Display', serif", fontSize: 28 }}
+                    className="text-[#004835]  font-extrabold m-0 leading-none mb-1"
+                    style={{ fontFamily: "'', serif", fontSize: 32 }}
                   >
                     {num}
                   </p>
-                  <p className="text-white/50 text-xs font-medium m-0 tracking-wide">{label}</p>
+                  <p className="text-black text-xs font-medium m-0 tracking-wide">{label}</p>
                 </div>
               )
             )}

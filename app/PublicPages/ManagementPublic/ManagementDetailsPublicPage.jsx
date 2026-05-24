@@ -5,77 +5,65 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ─── Team Data ───────────────────────────────────── */
-// To use real photos: add `image: "/images/team/filename.jpg"` to each member
 const teamMembers = [
   {
     id: 1,
-    name: "Syed Mahmud Hasan",
-    designation: "Chairman",
+    name: "Mr. Mahfuzul Haq",
+    designation: "",
     image: null,
     gender: "male",
     quote:
-      "Our mission is not only to create impact today, but to build sustainable systems that empower future generations across Bangladesh.",
+      "A seasoned business veteran with 45 years of experience, Mr. Mahfuzul Haq has successfully spearheaded ventures across diverse sectors including aviation, real estate, shipping, and media. His extensive, multi-industry portfolio reflects a lifetime of strategic leadership and enduring entrepreneurial acumen.",
   },
   {
     id: 2,
-    name: "Farzana Rahman",
-    designation: "Managing Director",
+    name: "Ms. Sharmin Haq",
+    designation: "Chairman",
     image: null,
     gender: "female",
     quote:
-      "Innovation, empathy, and accountability are the three pillars that guide every initiative we undertake.",
+      "A visionary entrepreneur who expertly steers the strategic direction and growth of the family enterprise. Her dynamic leadership not only honors the company's legacy but also drives modern innovation across their diverse portfolio.",
   },
   {
     id: 3,
-    name: "Md. Tanvir Hossain",
-    designation: "Chief Executive Officer (CEO)",
+    name: "Mr. Saiful Islam Jami",
+    designation: "Deputy Managing Director",
     image: null,
     gender: "male",
     quote:
-      "True development happens when communities gain both opportunity and the confidence to shape their own future.",
+      "As the designated successor of the group, Mr. Saiful Islam Jami brings 15 years of dedicated, hands-on business experience to his role. He actively bridges the gap between the family's foundational legacy and its future expansion, ensuring continuous momentum for the enterprise.",
   },
   {
     id: 4,
-    name: "Nusrat Jahan Chowdhury",
+    name: "M M Sahidul Islam",
     designation: "Executive Director",
-    image: null,
-    gender: "female",
-    quote:
-      "We believe meaningful progress begins by listening to people, understanding their realities, and acting with purpose.",
-  },
-  {
-    id: 5,
-    name: "A.K.M. Rezaul Karim",
-    designation: "Director, Strategy & Operations",
     image: null,
     gender: "male",
     quote:
-      "Our goal is to combine technology, research, and human-centered solutions to create lasting social transformation.",
+      "Playing a crucial role in overseeing the operational efficiency and day-to-day execution of the group's initiatives, his dedicated leadership ensures that the company's practical operations align seamlessly with its broader corporate objectives.",
+  },
+  {
+    id: 5,
+    name: "Ms. Faiza Chowdhury",
+    designation: "Director",
+    image: null,
+    gender: "female",
+    quote:
+      "Providing essential strategic oversight and governance to the organization's corporate board, her focused leadership and insights help guide the group's ongoing projects and foster sustainable business growth.",
   },
 ];
 
 /* ─── Generic Silhouette Avatar SVG ─────────────── */
-// bgColor  : card background
-// figColor : silhouette fill
 const SilhouetteAvatar = ({ bgColor = "#1B6B5A", figColor = "#004835" }) => (
   <svg
     viewBox="0 0 200 220"
     xmlns="http://www.w3.org/2000/svg"
     className="w-full h-full"
   >
-    {/* background */}
     <rect width="200" height="220" fill={bgColor} />
-
-    {/* subtle radial glow behind figure */}
     <ellipse cx="100" cy="130" rx="80" ry="70" fill={figColor} opacity="0.12" />
-
-    {/* silhouette – head */}
     <circle cx="100" cy="76" r="38" fill={figColor} opacity="0.85" />
-
-    {/* silhouette – shoulders / body */}
     <ellipse cx="100" cy="185" rx="66" ry="48" fill={figColor} opacity="0.85" />
-
-    {/* neck gap (same as bg) */}
     <ellipse cx="100" cy="118" rx="20" ry="10" fill={bgColor} />
   </svg>
 );
@@ -133,7 +121,11 @@ function MemberCard({ member, index, onClick }) {
       initial={{ opacity: 0, y: 48 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.55, delay: index * 0.11, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.55,
+        delay: index * 0.11,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       whileHover="hover"
       onClick={() => onClick(member)}
       className="relative cursor-pointer select-none group"
@@ -143,16 +135,6 @@ function MemberCard({ member, index, onClick }) {
         transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
         className="relative overflow-hidden rounded-2xl bg-white shadow-md"
       >
-        {/* Gold corner blob */}
-        {/* <div className="absolute top-0 right-0 z-10 w-[72px] h-[72px] bg-[#004835] rounded-bl-[100%] rounded-tr-2xl" /> */}
-        {/* D monogram */}
-        {/* <span
-          className="absolute top-3 right-3.5 z-20 text-white text-xl font-black leading-none select-none"
-          style={{ fontFamily: "'Playfair Display', serif", textShadow: "0 1px 4px rgba(0,0,0,0.3)" }}
-        >
-          D
-        </span> */}
-
         {/* Avatar / Image area */}
         <div className="relative w-full h-[230px] overflow-hidden">
           <CardVisual member={member} />
@@ -165,8 +147,16 @@ function MemberCard({ member, index, onClick }) {
             transition={{ duration: 0.25 }}
           >
             <div className="w-11 h-11 rounded-full border-2 border-white/70 flex items-center justify-center">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <circle cx="12" cy="12" r="10" />
                 <line x1="12" y1="8" x2="12" y2="16" />
                 <line x1="8" y1="12" x2="16" y2="12" />
@@ -180,15 +170,15 @@ function MemberCard({ member, index, onClick }) {
 
         {/* Name strip */}
         <div className="px-4 pt-3 pb-4 bg-white border-t-[3px] border-[#004835]">
-          <span className="inline-block bg-[#e8f4f0] text-[#1B6B5A] text-[10px] font-bold tracking-[0.08em] uppercase px-2 py-1 rounded mb-1.5">
-            {member.designation}
-          </span>
           <p
             className="text-[14px] font-bold text-gray-900 leading-snug m-0"
             style={{ fontFamily: "'Playfair Display', serif" }}
           >
             {member.name}
           </p>
+          <span className="inline-block bg-[#e8f4f0] text-[#1B6B5A] text-[10px] font-bold tracking-[0.08em] uppercase pr-2 py-1 rounded mb-1.5">
+            {member.designation}
+          </span>
         </div>
 
         {/* Bottom gradient strip */}
@@ -206,7 +196,10 @@ function Modal({ member, onClose }) {
         <motion.div
           key="backdrop"
           className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
-          style={{ background: "rgba(5,20,15,0.82)", backdropFilter: "blur(10px)" }}
+          style={{
+            background: "rgba(5,20,15,0.82)",
+            backdropFilter: "blur(10px)",
+          }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -249,7 +242,7 @@ function Modal({ member, onClose }) {
                   >
                     {member.name}
                   </p>
-                  <p className="text-[#004835] text-[11px] font-semibold mt-0.5 m-0">
+                  <p className="text-[#a8d5c5] text-[11px] font-semibold mt-0.5 m-0">
                     {member.designation}
                   </p>
                 </div>
@@ -282,14 +275,16 @@ function Modal({ member, onClose }) {
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mt-6">
-                  {["Leadership", "Strategy", "Impact", "Bangladesh"].map((tag) => (
-                    <span
-                      key={tag}
-                      className="bg-[#e8f4f0] text-[#1B6B5A] text-[11px] font-bold tracking-wide uppercase px-3 py-1 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  {["Leadership", "Strategy", "Impact", "Enterprise"].map(
+                    (tag) => (
+                      <span
+                        key={tag}
+                        className="bg-[#e8f4f0] text-[#1B6B5A] text-[11px] font-bold tracking-wide uppercase px-3 py-1 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -305,7 +300,10 @@ export default function ManagementTeamPage() {
   const [selected, setSelected] = useState(null);
 
   return (
-    <main className="min-h-screen bg-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+    <main
+      className="min-h-screen bg-white"
+      style={{ fontFamily: "'DM Sans', sans-serif" }}
+    >
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@400;500;600;700&display=swap');`}</style>
 
       {/* ── Banner ── */}
@@ -316,7 +314,8 @@ export default function ManagementTeamPage() {
         <div
           className="absolute inset-0 opacity-[0.05]"
           style={{
-            backgroundImage: "radial-gradient(circle, #fff 1.5px, transparent 1.5px)",
+            backgroundImage:
+              "radial-gradient(circle, #fff 1.5px, transparent 1.5px)",
             backgroundSize: "30px 30px",
           }}
         />
@@ -349,7 +348,8 @@ export default function ManagementTeamPage() {
               maxWidth: 600,
             }}
           >
-            Management<br />
+            Management
+            <br />
             <span className="text-[#004835]">Team</span>
           </motion.h1>
 
@@ -360,7 +360,9 @@ export default function ManagementTeamPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-black text-base leading-[1.75] max-w-md mb-9"
           >
-            Guided by purpose, driven by impact — the visionaries shaping a better Bangladesh through strategy, empathy, and innovation.
+            Guided by purpose, driven by impact — the visionaries shaping a
+            legacy of excellence through strategy, empathy, and entrepreneurial
+            acumen.
           </motion.p>
 
           {/* Stats */}
@@ -370,19 +372,23 @@ export default function ManagementTeamPage() {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="flex gap-10 flex-wrap"
           >
-            {[["5+", "Leaders"], ["15+", "Years Avg. Experience"], ["1M+", "Lives Impacted"]].map(
-              ([num, label]) => (
-                <div key={label}>
-                  <p
-                    className="text-[#004835]  font-extrabold m-0 leading-none mb-1 text-center"
-                    style={{ fontFamily: "'', serif", fontSize: 32 }}
-                  >
-                    {num}
-                  </p>
-                  <p className="text-black text-xs font-medium m-0 tracking-wide">{label}</p>
-                </div>
-              )
-            )}
+            {[
+              ["5+", "Leaders"],
+              ["45+", "Years of Experience"],
+              ["4+", "Industry Sectors"],
+            ].map(([num, label]) => (
+              <div key={label}>
+                <p
+                  className="text-[#004835] font-extrabold m-0 leading-none mb-1 text-center"
+                  style={{ fontSize: 32 }}
+                >
+                  {num}
+                </p>
+                <p className="text-black text-xs font-medium m-0 tracking-wide">
+                  {label}
+                </p>
+              </div>
+            ))}
           </motion.div>
         </div>
 
@@ -402,7 +408,12 @@ export default function ManagementTeamPage() {
       <section className="max-w-6xl mx-auto px-6 md:px-10 py-12 pb-24">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5 md:gap-6">
           {teamMembers.map((member, i) => (
-            <MemberCard key={member.id} member={member} index={i} onClick={setSelected} />
+            <MemberCard
+              key={member.id}
+              member={member}
+              index={i}
+              onClick={setSelected}
+            />
           ))}
         </div>
 
@@ -413,13 +424,15 @@ export default function ManagementTeamPage() {
           transition={{ delay: 0.6 }}
           className="text-center text-gray-400 text-sm mt-10"
         >
-          Click any card to view their message
+          Click any card to view their profile
         </motion.p>
       </section>
 
       {/* ── Modal ── */}
       <AnimatePresence>
-        {selected && <Modal member={selected} onClose={() => setSelected(null)} />}
+        {selected && (
+          <Modal member={selected} onClose={() => setSelected(null)} />
+        )}
       </AnimatePresence>
     </main>
   );

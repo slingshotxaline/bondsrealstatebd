@@ -567,13 +567,13 @@ export default function Footer() {
             className="text-gray-500 text-sm"
             style={{ fontFamily: "sans-serif" }}
           >
-            © Copyright {new Date().getFullYear()} by{" "}
+            {/* © Copyright {new Date().getFullYear()}. */}
             <Link
               href="https://www.a-linebrands.com/"
               target="_blank"
-              className="text-red-500  transition-colors duration-300"
+              className="text-gray-500  transition-colors duration-300 hover:underline"
             >
-              A-Line Limited
+               Developed by A-Line Limited 
             </Link>
           </p>
           <div

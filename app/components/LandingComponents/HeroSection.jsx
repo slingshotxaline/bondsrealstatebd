@@ -174,7 +174,7 @@ export default function HeroSection() {
         </div>
 
         {/* Bottom-right Image Panel */}
-        <div className="relative z-30 md:absolute md:bottom-0 md:right-0 flex flex-col sm:flex-row w-full md:w-auto">
+        {/* <div className="relative z-30 md:absolute md:bottom-0 md:right-0 flex flex-col sm:flex-row w-full md:w-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -190,7 +190,7 @@ export default function HeroSection() {
             />
             <div className="absolute inset-0 bg-black/10" />
           </motion.div>
-        </div>
+        </div> */}
 
         {/* Scroll indicator */}
         <motion.div

@@ -211,7 +211,7 @@ export default function ContactSection() {
               <div className="h-40 relative overflow-hidden">
                 <iframe
                   title="Location Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3650.781075080008!2d90.40164109999999!3d23.790808999999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c712aec672ed%3A0x63ad07e3e635e3b1!2sSky%20Logistics%20(BD)%20Limited!5e0!3m2!1sen!2sbd!4v1779535166247!5m2!1sen!2sbd"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d228.1740867214856!2d90.40148228238995!3d23.790655481050262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c71246cec095%3A0xf4cc6cac382b7949!2sRoad%20No.7%2C%20Dhaka%201213!5e0!3m2!1sen!2sbd!4v1780303394866!5m2!1sen!2sbd"
                   className="w-full h-full"
                   style={{ border: 0, filter: "grayscale(0.2)" }}
                   allowFullScreen

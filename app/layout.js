@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Bonds Real Estates",
+  title: "Bonds Real Estate",
   description: "Building Tomorrow’s Legacy with Vision & Integrity",
 };
 

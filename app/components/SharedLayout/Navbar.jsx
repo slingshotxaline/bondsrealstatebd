@@ -49,7 +49,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 group">
             <div className="relative w-[140px] h-[50px]">
               <Image
-                src="/assets/logo/logo3.png"
+                src="/assets/logo/logo6.png"
                 alt="Bonds RSB Logo"
                 fill
                 className="object-contain"
@@ -65,6 +65,25 @@ export default function Navbar() {
               className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
             >
               Home
+            </Link>
+            <Link
+              href="#about"
+              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
+            >
+              About Us
+            </Link>
+
+            <Link
+              href="/management-team"
+              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
+            >
+              Management Team
+            </Link>
+            <Link
+              href="/management-team"
+              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
+            >
+              Mission & Vision
             </Link>
             <Link
               href="#projects"
@@ -148,18 +167,6 @@ export default function Navbar() {
             >
               Our Concerns
             </Link>
-            <Link
-              href="#about"
-              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
-            >
-              About Us
-            </Link>
-            <Link
-              href="/management-team"
-              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
-            >
-              Management Team
-            </Link>
           </div>
 
           {/* CTA + Hamburger */}
@@ -168,7 +175,7 @@ export default function Navbar() {
               href="#contact"
               className="hidden sm:inline-flex items-center gap-2 bg-[#004835] hover:bg-[#7a5235] text-white text-[13.5px] font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-[#004835]/20"
             >
-              Get a Quote
+              Contact Us
             </Link>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
@@ -212,6 +219,28 @@ export default function Navbar() {
                 className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
               >
                 Home
+              </Link>
+
+              <Link
+                href="#about"
+                onClick={() => setMenuOpen(false)}
+                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
+              >
+                About Us
+              </Link>
+              <Link
+                href="/management-team"
+                onClick={() => setMenuOpen(false)}
+                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 last:border-0 text-[15px]"
+              >
+                Management Team
+              </Link>
+              <Link
+                href="#team"
+                onClick={() => setMenuOpen(false)}
+                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 last:border-0 text-[15px]"
+              >
+                Mission & Vision
               </Link>
 
               <Link
@@ -275,18 +304,11 @@ export default function Navbar() {
               </div>
 
               <Link
-                href="#about"
-                onClick={() => setMenuOpen(false)}
-                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
-              >
-                About Us
-              </Link>
-              <Link
                 href="#team"
                 onClick={() => setMenuOpen(false)}
                 className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 last:border-0 text-[15px]"
               >
-                Management Team
+                Our Concerns
               </Link>
 
               <Link
@@ -294,7 +316,7 @@ export default function Navbar() {
                 onClick={() => setMenuOpen(false)}
                 className="mt-3 inline-flex justify-center bg-[#004835] text-white text-[14px] font-semibold px-5 py-3 rounded-full"
               >
-                Get a Quote
+                Contact Us
               </Link>
             </div>
           </motion.div>

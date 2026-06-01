@@ -49,7 +49,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-2 group">
             <div className="relative w-[180px] h-[80px]">
               <Image
-                src="/assets/logo/logo6.png"
+                src="/assets/logo/logo7.png"
                 alt="Bonds RSB Logo"
                 fill
                 className="object-contain"

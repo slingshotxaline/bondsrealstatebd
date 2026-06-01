@@ -47,7 +47,7 @@ export default function Navbar() {
         <div className="max-w-[1400px] mx-auto px-6 lg:px-10 flex items-center justify-between h-[72px]">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="relative w-[140px] h-[50px]">
+            <div className="relative w-[180px] h-[80px]">
               <Image
                 src="/assets/logo/logo6.png"
                 alt="Bonds RSB Logo"
@@ -80,7 +80,7 @@ export default function Navbar() {
               Management Team
             </Link>
             <Link
-              href="/management-team"
+              href="#management-team"
               className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
             >
               Mission & Vision

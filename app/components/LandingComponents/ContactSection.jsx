@@ -238,7 +238,7 @@ export default function ContactSection() {
                       <rect x="2" y="4" width="20" height="16" rx="2" />
                       <path d="M2 7l10 7 10-7" />
                     </svg>
-                    <span> info@bondsinternationalltd.com<br /> +88 02 55041896, 02 226603195</span>
+                    <span>info@bondsrealestatebd.com<br /> +88 02 55041896, 02 226603195</span>
                   </div>
                 </div>
               </div>

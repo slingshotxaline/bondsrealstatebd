@@ -504,7 +504,7 @@ export default function Footer() {
                 "+88 02 55041896,",
                 " 02 226603195",
                 "+8801700764494",
-                "info@bondsinternationalltd.com",
+                "info@bondsrealestatebd.com",
                 "House# 5 (2nd Floor), Road# 7, Block# F,",
                 "Banani, Dhaka-1213.",
               ].map((line, i) => (
@@ -602,7 +602,7 @@ export default function Footer() {
             className="text-[28px] md:text-[48px] font-bold italic text-white leading-none whitespace-nowrap"
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            Bonds Real State
+            Bonds Real Estates
           </span>
         </motion.div>
       </div> */}

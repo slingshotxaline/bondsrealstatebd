@@ -19,19 +19,19 @@ const concerns = [
   },
   {
     id: 2,
-    name: "Bonds Developments and Logistics",
+    name: "Bonds Developments and Logistics Ltd.",
     description:
       "Provides end-to-end infrastructure and supply chain solutions tailored to support diverse commercial needs. This concern focuses on optimizing the movement of goods while managing strategic development projects to ensure operational efficiency.",
   },
   {
     id: 3,
-    name: "Tillage Aqua Culture Limited",
+    name: "Tillage Aqua Culture Ltd.",
     description:
       "Spanning an impressive 100 bighas, this agro and fisheries project is dedicated to boosting agricultural productivity and sustainable fisheries management. It operates across both government and non-government sectors.",
   },
   {
     id: 4,
-    name: "Sadarpur Dairy and Poultry",
+    name: "Sadarpur Dairy and Poultry Ltd.",
     description:
       "Located on a vast 150-bigha estate in Atroshi, Sadarpur (Faridpur), this integrated farm specializes in high-yield dairy and poultry production. The facility employs modern, sustainable farming practices to consistently supply fresh, premium-quality products.",
   },

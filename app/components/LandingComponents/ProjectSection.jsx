@@ -27,7 +27,7 @@ const properties = [
     baths: "4",
     parking: "Yes",
     location: "Sector-16, Jolshiri Abashon",
-    mainImg: "/assets/LandingProject/USaharaProject/SaharaBONDS .jpeg",
+    mainImg: "/assets/LandingProject/USaharaProject/SaharaUnified.jpeg",
     thumbImg: "/assets/LandingProject/USaharaProject/Sahara2.jpg",
   },
   {

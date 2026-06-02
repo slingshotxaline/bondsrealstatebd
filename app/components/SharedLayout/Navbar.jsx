@@ -86,7 +86,7 @@ export default function Navbar() {
               Mission & Vision
             </Link>
             <Link
-              href="#projects"
+              href="/projects"
               className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
             >
               Projects
@@ -244,7 +244,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="#projects"
+                href="/projects"
                 onClick={() => setMenuOpen(false)}
                 className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
               >

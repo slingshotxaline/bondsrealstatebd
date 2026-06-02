@@ -162,7 +162,7 @@ export default function Navbar() {
             </div>
 
             <Link
-              href="#ourconcerns"
+              href="/concerns"
               className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
             >
               Our Concerns
@@ -304,7 +304,7 @@ export default function Navbar() {
               </div>
 
               <Link
-                href="#team"
+                href="/concerns"
                 onClick={() => setMenuOpen(false)}
                 className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 last:border-0 text-[15px]"
               >

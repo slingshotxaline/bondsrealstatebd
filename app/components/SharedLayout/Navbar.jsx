@@ -67,7 +67,7 @@ export default function Navbar() {
               Home
             </Link>
             <Link
-              href="#about"
+              href="/about"
               className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
             >
               About Us
@@ -80,7 +80,7 @@ export default function Navbar() {
               Management Team
             </Link>
             <Link
-              href="#management-team"
+               href="/about"
               className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
             >
               Mission & Vision
@@ -222,7 +222,7 @@ export default function Navbar() {
               </Link>
 
               <Link
-                href="#about"
+                href="/about"
                 onClick={() => setMenuOpen(false)}
                 className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
               >
@@ -236,7 +236,7 @@ export default function Navbar() {
                 Management Team
               </Link>
               <Link
-                href="#team"
+                href="/about"
                 onClick={() => setMenuOpen(false)}
                 className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 last:border-0 text-[15px]"
               >

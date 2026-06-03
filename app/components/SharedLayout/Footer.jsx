@@ -4,13 +4,14 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 
 const quickLinks = [
-  "Home",
-  "Projects",
-  "Property Buy & Sell",
-  "Property Management",
-  "Property Development",
-  "About Us",
-  "Management Team",
+  { label: "Home", href: "/" },
+  { label: "Projects", href: "/projects" },
+  { label: "Property Buy & Sell", href: "/property-buy-sell" },
+  { label: "Property Management", href: "#services" },
+  { label: "Property Development", href: "#development" },
+  { label: "About Us", href: "/about" },
+  { label: "Management Team", href: "/management-team" },
+  { label: "Our Concerns", href: "/concerns" },
 ];
 
 /* ─── animated background ────────────────────────────────────── */
@@ -312,7 +313,7 @@ export default function Footer() {
             <ul className="space-y-3">
               {quickLinks.map((link, i) => (
                 <motion.li
-                  key={link}
+                  key={link.label}
                   initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
@@ -323,13 +324,13 @@ export default function Footer() {
                   }}
                 >
                   <Link
-                    href={`#${link.toLowerCase()}`}
+                    href={link.href}
                     className="group flex items-center gap-2 text-gray-300 text-[15px] transition-colors duration-200"
                     style={{ fontFamily: "sans-serif" }}
                   >
                     <motion.span className="inline-block w-0 h-px bg-[#004835] group-hover:w-4 transition-all duration-300" />
                     <span className="group-hover:text-[#004835] transition-colors duration-200">
-                      {link}
+                      {link.label}
                     </span>
                   </Link>
                 </motion.li>
@@ -573,7 +574,7 @@ export default function Footer() {
               target="_blank"
               className="text-gray-500  transition-colors duration-300 hover:underline"
             >
-               Developed by A-Line Limited 
+              Developed by A-Line Limited
             </Link>
           </p>
           <div

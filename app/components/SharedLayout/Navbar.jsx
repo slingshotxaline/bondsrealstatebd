@@ -191,7 +191,7 @@ export default function Navbar() {
           {/* Right side: CTA + Auth + Hamburger */}
           <div className="flex items-center gap-3">
             <Link
-              href="#contact"
+              href="/contact"
               className="hidden sm:inline-flex items-center gap-2 bg-[#004835] hover:bg-[#7a5235] text-white text-[13.5px] font-semibold px-5 py-2.5 rounded-full transition-all duration-200 hover:shadow-lg hover:shadow-[#004835]/20"
             >
               Contact Us
@@ -465,7 +465,7 @@ export default function Navbar() {
               )}
 
               <Link
-                href="#contact"
+                href="/contact"
                 onClick={() => setMenuOpen(false)}
                 className="mt-2 inline-flex justify-center bg-[#C89A6C] text-white text-[14px] font-semibold px-5 py-3 rounded-full hover:bg-[#b8895d] transition-colors"
               >

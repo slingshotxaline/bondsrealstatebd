@@ -1,8 +1,19 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+
+import { useAuth } from "@/app/context/AuthContext";
+import { useAuthModal } from "@/app/context/AuthModalContext";
+import {
+  ChevronDown,
+  LayoutDashboard,
+  LogIn,
+  LogOut,
+  User
+} from "lucide-react";
 
 const propertySolutions = [
   { label: "Property Buy/Sell", href: "property-buy-sell", icon: "🏠" },
@@ -11,11 +22,18 @@ const propertySolutions = [
 ];
 
 export default function Navbar() {
+  const router = useRouter();
+  const { user, logout, isAdmin, loading } = useAuth();
+  const { setShowModal, setModalType } = useAuthModal();
+
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileDropdownOpen, setMobileDropdownOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+
   const dropdownRef = useRef(null);
+  const userMenuRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -23,16 +41,38 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Close dropdown on outside click
+  // Close dropdowns on outside click
   useEffect(() => {
-    const handleClickOutside = (e) => {
+    const handler = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
         setDropdownOpen(false);
       }
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
+        setUserMenuOpen(false);
+      }
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
   }, []);
+
+  const openLogin = () => {
+    setModalType("login");
+    setShowModal(true);
+  };
+  const openRegister = () => {
+    setModalType("register");
+    setShowModal(true);
+  };
+
+  const handleLogout = () => {
+    logout();
+    setUserMenuOpen(false);
+    router.push("/");
+  };
+
+  // ── Shared nav link class ────────────────────────────────────────────────
+  const navLink =
+    "text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap";
 
   return (
     <>
@@ -60,44 +100,28 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden xl:flex items-center gap-7">
-            <Link
-              href="/"
-              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
-            >
+            <Link href="/" className={navLink}>
               Home
             </Link>
-            <Link
-              href="/about"
-              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
-            >
+            <Link href="/about" className={navLink}>
               About Us
             </Link>
-
-            <Link
-              href="/management-team"
-              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
-            >
+            <Link href="/management-team" className={navLink}>
               Management Team
             </Link>
-            <Link
-               href="/about"
-              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
-            >
+            <Link href="/about" className={navLink}>
               Mission & Vision
             </Link>
-            <Link
-              href="/projects"
-              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
-            >
+            <Link href="/projects" className={navLink}>
               Projects
             </Link>
 
-            {/* ── Property Solutions Dropdown ── */}
+            {/* Property Solutions Dropdown */}
             <div ref={dropdownRef} className="relative">
               <button
                 onClick={() => setDropdownOpen((v) => !v)}
                 onMouseEnter={() => setDropdownOpen(true)}
-                className="flex items-center gap-1.5 text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
+                className={`flex items-center gap-1.5 ${navLink}`}
               >
                 Property Solutions
                 <svg
@@ -127,9 +151,7 @@ export default function Navbar() {
                     onMouseLeave={() => setDropdownOpen(false)}
                     className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
                   >
-                    {/* Top accent bar */}
                     <div className="h-1 w-full bg-gradient-to-r from-[#004835] to-[#C89A6C]" />
-
                     <div className="py-2">
                       {propertySolutions.map((item) => (
                         <Link
@@ -141,7 +163,7 @@ export default function Navbar() {
                           <span className="text-base">{item.icon}</span>
                           <span className="font-semibold">{item.label}</span>
                           <svg
-                            className="w-3 h-3 ml-auto text-gray-300 group-hover:text-[#004835] group-hover:translate-x-0.5 transition-all duration-150"
+                            className="w-3 h-3 ml-auto text-gray-300 group-hover:text-[#004835] group-hover:translate-x-0.5 transition-all"
                             fill="none"
                             stroke="currentColor"
                             strokeWidth="2.5"
@@ -161,15 +183,12 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            <Link
-              href="/concerns"
-              className="text-[13.5px] text-gray-600 hover:text-[#004835] transition-colors duration-200 font-semibold whitespace-nowrap"
-            >
+            <Link href="/concerns" className={navLink}>
               Our Concerns
             </Link>
           </div>
 
-          {/* CTA + Hamburger */}
+          {/* Right side: CTA + Auth + Hamburger */}
           <div className="flex items-center gap-3">
             <Link
               href="#contact"
@@ -177,6 +196,104 @@ export default function Navbar() {
             >
               Contact Us
             </Link>
+
+            {/* ── Auth area ──────────────────────────────────────────────── */}
+            {!loading && (
+              <>
+                {user ? (
+                  // ── Logged in: avatar dropdown ──────────────────────────
+                  <div ref={userMenuRef} className="relative hidden xl:block">
+                    <button
+                      onClick={() => setUserMenuOpen((v) => !v)}
+                      className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-full border border-gray-200 hover:border-[#004835]/40 transition-all bg-white"
+                    >
+                      {/* Avatar circle */}
+                      <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#004835] to-[#004835]/60 flex items-center justify-center text-white font-bold text-xs">
+                        {user.name?.[0]?.toUpperCase()}
+                      </div>
+                      <span className="text-xs font-semibold text-gray-700 max-w-[80px] truncate">
+                        {user.name?.split(" ")[0]}
+                      </span>
+                      <ChevronDown
+                        size={13}
+                        className={`text-gray-400 transition-transform duration-200 ${
+                          userMenuOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+
+                    <AnimatePresence>
+                      {userMenuOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 8, scale: 0.97 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: 8, scale: 0.97 }}
+                          transition={{ duration: 0.18, ease: "easeOut" }}
+                          className="absolute top-full right-0 mt-3 w-52 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden"
+                        >
+                          <div className="h-1 w-full bg-gradient-to-r from-[#004835] to-[#C89A6C]" />
+
+                          {/* User info */}
+                          <div className="px-4 py-3 border-b border-gray-50">
+                            <p className="text-sm font-bold text-gray-900 truncate">
+                              {user.name}
+                            </p>
+                            <p className="text-xs text-gray-400 truncate">
+                              {user.email}
+                            </p>
+                            <span
+                              className={`inline-block mt-1.5 px-2 py-0.5 text-[10px] font-bold rounded-full
+                              ${
+                                isAdmin
+                                  ? "bg-amber-50 text-amber-700 border border-amber-200"
+                                  : "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                              }`}
+                            >
+                              {user.role?.toUpperCase()}
+                            </span>
+                          </div>
+
+                          <div className="py-2">
+                            {/* Dashboard link */}
+                            <Link
+                              href={isAdmin ? "/admin" : "/dashboard"}
+                              onClick={() => setUserMenuOpen(false)}
+                              className="flex items-center gap-3 px-4 py-2.5 text-[13px] text-gray-700 hover:text-[#004835] hover:bg-[#004835]/5 transition-all font-semibold"
+                            >
+                              <LayoutDashboard
+                                size={14}
+                                className="text-[#004835]"
+                              />
+                              {isAdmin ? "Admin Panel" : "My Dashboard"}
+                            </Link>
+
+                            {/* Logout */}
+                            <button
+                              onClick={handleLogout}
+                              className="w-full flex items-center gap-3 px-4 py-2.5 text-[13px] text-red-500 hover:bg-red-50 transition-all font-semibold"
+                            >
+                              <LogOut size={14} />
+                              Sign Out
+                            </button>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  // ── Not logged in: Sign In + Register buttons ───────────
+                  <button
+                    onClick={openLogin}
+                    className="hidden xl:flex items-center gap-2 text-[16px] font-bold text-gray-600 hover:text-[#004835] px-2 py-2 rounded-full transition-all hover:bg-[#004835]/5 border border-gray-200 hover:border-[#004835]/30"
+                  >
+                    <User className="text-[#004835]"  size={17} />
+                    
+                  </button>
+                )}
+              </>
+            )}
+
+            {/* Hamburger */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="xl:hidden flex flex-col gap-1.5 p-2 group"
@@ -202,7 +319,7 @@ export default function Navbar() {
         </div>
       </motion.nav>
 
-      {/* Mobile Menu */}
+      {/* ── Mobile Menu ─────────────────────────────────────────────────────── */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -213,43 +330,22 @@ export default function Navbar() {
             className="fixed top-[72px] left-0 right-0 z-40 bg-white border-t border-gray-100 shadow-xl xl:hidden"
           >
             <div className="px-6 py-4 flex flex-col gap-1">
-              <Link
-                href="/"
-                onClick={() => setMenuOpen(false)}
-                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
-              >
-                Home
-              </Link>
-
-              <Link
-                href="/about"
-                onClick={() => setMenuOpen(false)}
-                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
-              >
-                About Us
-              </Link>
-              <Link
-                href="/management-team"
-                onClick={() => setMenuOpen(false)}
-                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 last:border-0 text-[15px]"
-              >
-                Management Team
-              </Link>
-              <Link
-                href="/about"
-                onClick={() => setMenuOpen(false)}
-                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 last:border-0 text-[15px]"
-              >
-                Mission & Vision
-              </Link>
-
-              <Link
-                href="/projects"
-                onClick={() => setMenuOpen(false)}
-                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
-              >
-                Projects
-              </Link>
+              {[
+                { href: "/", label: "Home" },
+                { href: "/about", label: "About Us" },
+                { href: "/management-team", label: "Management Team" },
+                { href: "/about", label: "Mission & Vision" },
+                { href: "/projects", label: "Projects" },
+              ].map(({ href, label }) => (
+                <Link
+                  key={label}
+                  href={href}
+                  onClick={() => setMenuOpen(false)}
+                  className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
+                >
+                  {label}
+                </Link>
+              ))}
 
               {/* Property Solutions accordion */}
               <div className="border-b border-gray-50">
@@ -306,15 +402,72 @@ export default function Navbar() {
               <Link
                 href="/concerns"
                 onClick={() => setMenuOpen(false)}
-                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 last:border-0 text-[15px]"
+                className="block py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
               >
                 Our Concerns
               </Link>
 
+              {/* ── Mobile auth section ──────────────────────────────────── */}
+              {!loading && (
+                <>
+                  {user ? (
+                    // Logged in mobile
+                    <div className="mt-2 pt-2 border-t border-gray-100">
+                      {/* User info pill */}
+                      <div className="flex items-center gap-3 px-1 py-2 mb-2">
+                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#004835] to-[#004835]/60 flex items-center justify-center text-white font-bold text-sm">
+                          {user.name?.[0]?.toUpperCase()}
+                        </div>
+                        <div>
+                          <p className="text-sm font-bold text-gray-900">
+                            {user.name}
+                          </p>
+                          <p className="text-xs text-gray-400">
+                            {user.role?.toUpperCase()}
+                          </p>
+                        </div>
+                      </div>
+
+                      <Link
+                        href={isAdmin ? "/admin" : "/dashboard"}
+                        onClick={() => setMenuOpen(false)}
+                        className="flex items-center gap-3 py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
+                      >
+                        <LayoutDashboard size={16} className="text-[#004835]" />
+                        {isAdmin ? "Admin Panel" : "My Dashboard"}
+                      </Link>
+
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setMenuOpen(false);
+                        }}
+                        className="w-full flex items-center gap-3 py-3 text-red-500 font-semibold text-[15px]"
+                      >
+                        <LogOut size={16} />
+                        Sign Out
+                      </button>
+                    </div>
+                  ) : (
+                    // Not logged in mobile
+                    <button
+                      onClick={() => {
+                        openLogin();
+                        setMenuOpen(false);
+                      }}
+                      className="mt-3 w-full flex items-center justify-center gap-2 py-3 border-2 border-[#004835] text-[#004835] font-semibold text-[14px] rounded-full hover:bg-[#004835]/5 transition-colors"
+                    >
+                      <LogIn size={16} />
+                      Sign In
+                    </button>
+                  )}
+                </>
+              )}
+
               <Link
                 href="#contact"
                 onClick={() => setMenuOpen(false)}
-                className="mt-3 inline-flex justify-center bg-[#004835] text-white text-[14px] font-semibold px-5 py-3 rounded-full"
+                className="mt-2 inline-flex justify-center bg-[#C89A6C] text-white text-[14px] font-semibold px-5 py-3 rounded-full hover:bg-[#b8895d] transition-colors"
               >
                 Contact Us
               </Link>

@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "./components/SharedLayout/Navbar";
 import Footer from "./components/SharedLayout/Footer";
 import { AuthModalProvider } from "./context/AuthModalContext";
+import { AuthProvider } from "./context/AuthContext";
+import { ToastProvider } from "./components/ui/Toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,11 +28,17 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <AuthModalProvider>
-          <Navbar />
-          {children}
-          <Footer />
-        </AuthModalProvider>{" "}
+        
+
+        <AuthProvider>
+           <ToastProvider> 
+            <AuthModalProvider> 
+              <Navbar />
+              {children}
+              <Footer /> 
+            </AuthModalProvider> 
+          </ToastProvider> 
+        </AuthProvider>
        
       </body>
     </html>

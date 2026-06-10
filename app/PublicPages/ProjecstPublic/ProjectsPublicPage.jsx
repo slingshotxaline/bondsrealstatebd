@@ -396,7 +396,7 @@ export default function ProjectsPublicPage() {
               className="text-2xl sm:text-3xl font-bold text-gray-900"
               style={{ fontFamily: "'Georgia', serif" }}
             >
-              <em className="italic font-light text-[#004835]">Our</em> Projects
+              <em className="italic font-light text-[#004835]">Our Projects</em> 
             </h2>
           </div>
 

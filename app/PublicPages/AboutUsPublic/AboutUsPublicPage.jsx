@@ -192,7 +192,7 @@ export default function AboutUs() {
                 className="text-[clamp(32px,4vw,48px)] font-bold text-gray-900 mb-6 leading-tight"
                 style={{ fontFamily: "'Georgia', serif" }}
               >
-                <em className="font-light italic text-[#004835]">About</em> Us
+                <em className="font-light italic text-[#004835]">About Us</em> 
               </motion.h2>
 
               <motion.p
@@ -336,7 +336,7 @@ export default function AboutUs() {
             className="text-[clamp(32px,4vw,48px)] font-bold text-gray-900 mb-6 leading-tight text-center"
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            <em className="font-light italic text-[#004835]">Core</em> Values
+            <em className="font-light italic text-[#004835]">Core Values</em> 
           </motion.h2>
 
           <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">

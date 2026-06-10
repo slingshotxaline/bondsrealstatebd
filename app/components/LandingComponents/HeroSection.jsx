@@ -42,7 +42,7 @@ export default function HeroSection() {
               <span className="block text-[1.75rem] font-light italic">
                 Building Tomorrow's Legacy
               </span>
-              <span className="block text-[1.75rem] font-bold mt-0.5">
+              <span className="block text-[1.75rem] font-bold italic mt-0.5">
                 with Vision & Integrity
               </span>
             </h1>
@@ -136,7 +136,7 @@ export default function HeroSection() {
                 Building Tomorrow's Legacy
               </span>
               <span
-                className="block text-4xl sm:text-5xl lg:text-6xl font-bold"
+                className="block text-4xl sm:text-5xl lg:text-6xl font-bold italic"
                 style={{ fontFamily: "'Georgia', serif" }}
               >
                 with Vision & Integrity

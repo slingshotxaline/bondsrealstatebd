@@ -282,7 +282,7 @@ export default function AboutSection() {
               className="text-[clamp(32px,4vw,48px)] font-bold text-gray-900 mb-6 leading-tight"
               style={{ fontFamily: "'Georgia', serif" }}
             >
-              <em className="font-light italic text-[#004835]">About</em> Us
+              <em className="font-light italic text-[#004835]">About  Us</em>
             </motion.h2>
 
             {/* Body */}

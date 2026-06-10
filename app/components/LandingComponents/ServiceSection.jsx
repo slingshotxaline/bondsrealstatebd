@@ -306,7 +306,7 @@ export default function ServicesSection() {
             className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight max-w-2xl mx-auto"
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            <em className="font-light italic">Services for </em> your property milestones
+            <em className="font-light italic">Services for your property milestones</em> 
           </motion.h2>
 
           {/* Animated underline */}

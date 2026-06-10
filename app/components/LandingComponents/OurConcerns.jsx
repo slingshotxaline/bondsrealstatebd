@@ -453,7 +453,7 @@ export default function OurConcerns() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.35 }}
             >
-              Our
+              Our  Concerns
             </motion.em>{" "}
             <motion.span
               initial={{ opacity: 0, x: 20 }}
@@ -461,7 +461,7 @@ export default function OurConcerns() {
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.45 }}
             >
-              Concerns
+             
             </motion.span>
           </h2>
 

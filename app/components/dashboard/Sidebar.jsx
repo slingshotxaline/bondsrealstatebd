@@ -22,7 +22,8 @@ const adminNav = [
   { label: 'Admin Panel',   href: '/admin',                  icon: Shield },
   { label: 'Properties',    href: '/admin/properties',       icon: Building2 },
   { label: 'Users',         href: '/admin/users',            icon: Users },
-  { label: 'Inquiries',     href: '/admin/inquiries',        icon: FileCheck },
+  { label: 'Property Inquiries',     href: '/admin/inquiries',        icon: FileCheck },
+  { label: 'Contact Messages',      href: '/admin/contacts',     icon: MessageSquare }, 
 ];
 
 function NavItem({ item, onClick }) {

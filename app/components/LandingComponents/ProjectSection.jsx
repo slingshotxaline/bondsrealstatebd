@@ -416,7 +416,7 @@ export default function ProjectsSection() {
             className="text-4xl lg:text-5xl font-bold text-gray-900"
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            <em className="font-light italic text-[#004835]">Our</em> Projects
+            <em className="font-light italic text-[#004835]">Our Projects</em> 
           </motion.h2>
 
           <motion.div

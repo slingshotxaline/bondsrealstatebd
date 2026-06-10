@@ -284,9 +284,9 @@ export default function Navbar() {
                   // ── Not logged in: Sign In + Register buttons ───────────
                   <button
                     onClick={openLogin}
-                    className="hidden xl:flex items-center gap-2 text-[16px] font-bold text-gray-600 hover:text-[#004835] px-2 py-2 rounded-full transition-all hover:bg-[#004835]/5 border border-gray-200 hover:border-[#004835]/30"
+                    className="hidden xl:flex items-center gap-2 text-[16px] font-bold bg-[#004835] text-gray-600 hover:text-[#004835] px-2 py-2 rounded-full transition-all  border border-gray-200 hover:border-[#004835]/30"
                   >
-                    <User className="text-[#004835]"  size={17} />
+                    <User className="text-white"  size={17} />
                     
                   </button>
                 )}

@@ -252,7 +252,7 @@ function FloatingOrb({ style }) {
 /* ── Page ── */
 export default function OurConcernsPublicPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white mt-10">
 
       {/* ── Hero Banner ── */}
       <div className="relative h-52 sm:h-60 md:h-72 bg-[#0a1f19] flex flex-col items-center justify-center overflow-hidden">
@@ -306,7 +306,7 @@ export default function OurConcernsPublicPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.15 }}
           >
-            <em className="italic font-light text-[#5cffbc]">Our</em> Concern
+            <em className="italic font-light text-[#5cffbc]">Our Concern</em> 
           </motion.h1>
 
           <motion.p
@@ -355,7 +355,7 @@ export default function OurConcernsPublicPage() {
             </div>
 
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900" style={{ fontFamily: "'Georgia', serif" }}>
-              <em className="italic font-light" style={{ color: "#004835" }}>Diverse</em> Ventures
+              <em className="italic font-light" style={{ color: "#004835" }}>Diverse Ventures</em> 
             </h2>
 
             <motion.div

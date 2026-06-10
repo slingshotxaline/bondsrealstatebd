@@ -1,72 +1,84 @@
-'use client';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
-import { BedDouble, Bath, Maximize2, MapPin, Star, ArrowUpRight } from 'lucide-react';
+"use client";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { MapPin, BedDouble, Bath, Maximize2, Star, Heart } from "lucide-react";
 
-function formatPrice(price, priceType, purpose) {
-  if (purpose === 'rent') return `৳ ${price.toLocaleString()} /mo`;
+function formatPrice(price, listingType) {
+  if (listingType === "Rent") return `৳ ${price?.toLocaleString()} /mo`;
   if (price >= 10000000) return `৳ ${(price / 10000000).toFixed(1)} Cr`;
   if (price >= 100000) return `৳ ${(price / 100000).toFixed(1)} L`;
-  return `৳ ${price.toLocaleString()}`;
+  return `৳ ${price?.toLocaleString()}`;
 }
 
-export default function PropertyCard({ property, index, isGrid }) {
-  const timeAgo = (dateStr) => {
-    const diff = (new Date() - new Date(dateStr)) / 1000;
-    if (diff < 3600) return `${Math.floor(diff / 60)}m ago`;
-    if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`;
-    return `${Math.floor(diff / 86400)}d ago`;
-  };
+export default function PropertyCard({ property: p, index, isGrid }) {
+  const thumb =
+    p.thumbnail?.url ||
+    "https://placehold.co/400x280/e5e7eb/9ca3af?text=No+Image";
 
-  if (isGrid) {
+  if (!isGrid) {
+    // ── List view ──────────────────────────────────────────────────────────────
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.07, duration: 0.4 }}
-        whileHover={{ y: -4 }}
-        className="group relative"
+        transition={{ delay: index * 0.04 }}
+        className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
       >
-       <Link href={`/property-buy-sell/${property.slug}`}>
-          <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-amber-400/60 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(245,158,11,0.15)] shadow-sm">
-            {/* Image */}
-            <div className="relative h-48 sm:h-52 overflow-hidden">
-              <img
-                src={property.image}
-                alt={property.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-              {property.featured && (
-                <div className="absolute top-3 left-3 flex items-center gap-1 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md">
-                  <Star size={10} fill="white" /> FEATURED
-                </div>
-              )}
-              <div className={`absolute top-3 right-3 text-xs font-bold px-2.5 py-1 rounded-full shadow-md ${
-                property.purpose === 'rent' ? 'bg-emerald-500 text-white' : 'bg-blue-500 text-white'
-              }`}>
-                {property.purpose === 'rent' ? 'RENT' : 'SALE'}
-              </div>
-              <div className="absolute bottom-3 left-3 text-white font-bold text-lg leading-tight drop-shadow-md">
-                {formatPrice(property.price, property.priceType, property.purpose)}
-              </div>
+        <Link
+          href={`/property-buy-sell/${p.slug || p._id}`}
+          className="flex flex-col sm:flex-row gap-0"
+        >
+          <div className="relative w-full sm:w-52 h-44 sm:h-auto flex-shrink-0 overflow-hidden">
+            <img
+              src={thumb}
+              alt={p.title}
+              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            />
+            <div
+              className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold text-white
+              ${p.listingType === "Rent" ? "bg-emerald-500" : "bg-blue-500"}`}
+            >
+              FOR {p.listingType?.toUpperCase()}
             </div>
-
-            {/* Content */}
-            <div className="p-4">
-              <h3 className="text-gray-900 font-semibold text-sm leading-snug mb-1 group-hover:text-amber-600 transition-colors line-clamp-1">
-                {property.title}
-              </h3>
-              <div className="flex items-center gap-1 text-gray-400 text-xs mb-3">
-                <MapPin size={11} />
-                <span>{property.location}, {property.city}</span>
+            {p.isFeatured && (
+              <div className="absolute top-3 right-3 flex items-center gap-1 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">
+                <Star size={9} fill="white" /> FEATURED
               </div>
-
-              <div className="flex items-center justify-between text-xs text-gray-500 border-t border-gray-100 pt-3">
-                <span className="flex items-center gap-1.5"><BedDouble size={13} className="text-amber-500" /> {property.bedrooms}</span>
-                <span className="flex items-center gap-1.5"><Bath size={13} className="text-amber-500" /> {property.bathrooms}</span>
-                <span className="flex items-center gap-1.5"><Maximize2 size={13} className="text-amber-500" /> {property.size} ft²</span>
-              </div>
+            )}
+          </div>
+          <div className="flex-1 p-4 sm:p-5">
+            <span className="inline-block text-[10px] font-semibold text-amber-600 border border-amber-200 bg-amber-50 px-2 py-0.5 rounded mb-1.5">
+              {p.propertyCategory?.toUpperCase()}
+            </span>
+            <h3 className="font-bold text-gray-900 text-base mb-1.5 line-clamp-1">
+              {p.title}
+            </h3>
+            <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3">
+              <MapPin size={11} className="text-amber-500" />
+              {p.area}, {p.city}
+            </div>
+            <div className="flex items-center gap-4 text-xs text-gray-500 mb-4">
+              {p.bedrooms != null && (
+                <span className="flex items-center gap-1">
+                  <BedDouble size={12} className="text-amber-500" />
+                  {p.bedrooms} Beds
+                </span>
+              )}
+              {p.bathrooms != null && (
+                <span className="flex items-center gap-1">
+                  <Bath size={12} className="text-amber-500" />
+                  {p.bathrooms} Baths
+                </span>
+              )}
+              {p.size && (
+                <span className="flex items-center gap-1">
+                  <Maximize2 size={12} className="text-amber-500" />
+                  {p.size} ft²
+                </span>
+              )}
+            </div>
+            <div className="text-lg font-bold text-amber-600">
+              {formatPrice(p.price, p.listingType)}
             </div>
           </div>
         </Link>
@@ -74,76 +86,90 @@ export default function PropertyCard({ property, index, isGrid }) {
     );
   }
 
-  // List view
+  // ── Grid view ────────────────────────────────────────────────────────────────
   return (
     <motion.div
-      initial={{ opacity: 0, x: -15 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: index * 0.07, duration: 0.4 }}
-      className="group"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: index * 0.05 }}
+      className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all group"
     >
-     <Link href={`/property-buy-sell/${property.slug}`}>
-        <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:border-amber-400/60 transition-all duration-500 hover:shadow-[0_8px_40px_rgba(245,158,11,0.15)] shadow-sm flex flex-col sm:flex-row">
-          {/* Image */}
-          <div className="relative w-full sm:w-56 md:w-64 flex-shrink-0 overflow-hidden h-48 sm:h-auto">
-            <img
-              src={property.image}
-              alt={property.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-b sm:bg-gradient-to-r from-transparent to-black/10" />
-            {property.featured && (
-              <div className="absolute top-3 left-3 flex items-center gap-1 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                <Star size={10} fill="white" /> FEATURED
-              </div>
-            )}
-            <div className={`absolute bottom-3 left-3 text-xs font-bold px-2.5 py-1 rounded-full ${
-              property.purpose === 'rent' ? 'bg-emerald-500 text-white' : 'bg-blue-500 text-white'
-            }`}>
-              {property.purpose === 'rent' ? 'RENT' : 'SALE'}
-            </div>
+     <Link href={`/property-buy-sell/${p.slug || p._id}`}>
+        {/* Image */}
+        <div className="relative h-48 overflow-hidden">
+          <img
+            src={thumb}
+            alt={p.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+
+          <div
+            className={`absolute top-3 left-3 px-2.5 py-1 rounded-full text-[10px] font-bold text-white
+            ${p.listingType === "Rent" ? "bg-emerald-500" : "bg-blue-500"}`}
+          >
+            FOR {p.listingType?.toUpperCase()}
           </div>
 
-          {/* Content */}
-          <div className="flex-1 p-4 sm:p-5 flex flex-col justify-between">
-            <div>
-              <div className="flex items-start justify-between mb-2 gap-2">
-                <div className="min-w-0">
-                  <div className="inline-block text-[10px] font-semibold text-amber-600 border border-amber-300 bg-amber-50 px-2 py-0.5 rounded mb-1.5">
-                    {property.type?.toUpperCase()}
-                  </div>
-                  <h3 className="text-gray-900 font-semibold text-sm sm:text-base leading-snug group-hover:text-amber-600 transition-colors line-clamp-1">
-                    {property.title}
-                  </h3>
-                </div>
-                <div className="text-right flex-shrink-0">
-                  <div className="text-amber-600 font-bold text-base sm:text-lg whitespace-nowrap">
-                    {formatPrice(property.price, property.priceType, property.purpose)}
-                  </div>
-                </div>
-              </div>
-              <div className="flex items-center gap-1 text-gray-400 text-xs mb-3">
-                <MapPin size={11} />
-                <span>{property.location}, {property.city}</span>
-              </div>
-              <p className="text-gray-400 text-xs line-clamp-2 leading-relaxed hidden sm:block">
-                {property.description}
-              </p>
+          {p.isFeatured && (
+            <div className="absolute top-3 right-10 flex items-center gap-1 bg-amber-500 text-white text-[10px] font-bold px-2 py-1 rounded-full">
+              <Star size={9} fill="white" /> FEATURED
             </div>
+          )}
 
-            <div className="flex flex-col xs:flex-row items-start xs:items-center justify-between mt-3 pt-3 border-t border-gray-100 gap-2">
-              <div className="flex items-center gap-3 sm:gap-4 text-xs text-gray-500 flex-wrap">
-                <span className="flex items-center gap-1.5"><BedDouble size={13} className="text-amber-500" /> {property.bedrooms} Beds</span>
-                <span className="flex items-center gap-1.5"><Bath size={13} className="text-amber-500" /> {property.bathrooms} Baths</span>
-                <span className="flex items-center gap-1.5"><Maximize2 size={13} className="text-amber-500" /> {property.size} ft²</span>
-              </div>
-              <div className="flex items-center gap-2 text-gray-400 text-xs flex-shrink-0">
-                <span>{property.owner}</span>
-                <span>·</span>
-                <span>{timeAgo(property.postedAt)}</span>
-                <ArrowUpRight size={14} className="text-amber-500 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </div>
+          <button
+            onClick={(e) => e.preventDefault()}
+            className="absolute top-3 right-3 p-1.5 bg-white/20 backdrop-blur-sm rounded-lg text-white hover:bg-white/40 transition-colors"
+          >
+            <Heart size={13} />
+          </button>
+
+          <div className="absolute bottom-3 left-3">
+            <div className="text-white font-bold text-base drop-shadow">
+              {formatPrice(p.price, p.listingType)}
             </div>
+          </div>
+        </div>
+
+        {/* Body */}
+        <div className="p-4">
+          <span className="inline-block text-[10px] font-semibold text-amber-600 border border-amber-200 bg-amber-50 px-2 py-0.5 rounded mb-1.5">
+            {p.propertyCategory?.toUpperCase()}
+          </span>
+          <h3 className="font-bold text-gray-900 text-sm mb-1.5 line-clamp-1">
+            {p.title}
+          </h3>
+          <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-3">
+            <MapPin size={11} className="text-amber-500 flex-shrink-0" />
+            <span className="truncate">
+              {p.area}, {p.city}
+            </span>
+          </div>
+          <div className="flex items-center gap-3 text-xs text-gray-500 pt-3 border-t border-gray-100">
+            {p.bedrooms != null && (
+              <span className="flex items-center gap-1">
+                <BedDouble size={11} className="text-amber-500" />
+                {p.bedrooms}
+              </span>
+            )}
+            {p.bathrooms != null && (
+              <span className="flex items-center gap-1">
+                <Bath size={11} className="text-amber-500" />
+                {p.bathrooms}
+              </span>
+            )}
+            {p.size && (
+              <span className="flex items-center gap-1">
+                <Maximize2 size={11} className="text-amber-500" />
+                {p.size} ft²
+              </span>
+            )}
+            <span className="ml-auto text-[10px] text-gray-300">
+              {new Date(p.createdAt).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+              })}
+            </span>
           </div>
         </div>
       </Link>

@@ -107,6 +107,11 @@ export const authAPI = {
   refresh:        (body) => request("/auth/refresh",         { method: "POST", body: JSON.stringify(body) }),
 };
 
+export const projectAPI = {
+  getAll:   (params = '') => request(`/projects?${params}`),
+  getOne:   (id)          => request(`/projects/${id}`),
+};
+
 // ── Properties ────────────────────────────────────────────────────────────────
 export const propertyAPI = {
   getAll:        (params = "") => request(`/properties?${params}`),
@@ -158,4 +163,13 @@ export const adminAPI = {
   updateContact:    (id, body)    => request(`/admin/contacts/${id}`, { method: "PATCH", body: JSON.stringify(body) }),
   deleteContact:    (id)          => request(`/admin/contacts/${id}`, { method: "DELETE" }),
   getContactStats:  ()            => request("/admin/contacts/stats"),
+};
+
+export const adminProjectAPI = {
+  getAll:        (params = '') => request(`/admin/projects?${params}`),
+  create:        (fd)          => requestForm('/admin/projects', fd),
+  update:        (id, fd)      => requestForm(`/admin/projects/${id}`, fd, 'PUT'),
+  delete:        (id)          => request(`/admin/projects/${id}`, { method: 'DELETE' }),
+  togglePublish: (id)          => request(`/admin/projects/${id}/toggle-publish`, { method: 'PATCH' }),
+  reorder:       (body)        => request('/admin/projects/reorder', { method: 'PATCH', body: JSON.stringify(body) }),
 };

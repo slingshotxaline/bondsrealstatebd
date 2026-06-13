@@ -8,11 +8,13 @@ import { useEffect, useRef, useState } from "react";
 import { useAuth } from "@/app/context/AuthContext";
 import { useAuthModal } from "@/app/context/AuthModalContext";
 import {
+  Building2,
   ChevronDown,
   LayoutDashboard,
   LogIn,
   LogOut,
-  User
+  Shield,
+  User,
 } from "lucide-react";
 
 const propertySolutions = [
@@ -286,8 +288,7 @@ export default function Navbar() {
                     onClick={openLogin}
                     className="hidden xl:flex items-center gap-2 text-[16px] font-bold bg-[#004835] text-gray-600 hover:text-[#004835] px-2 py-2 rounded-full transition-all  border border-gray-200 hover:border-[#004835]/30"
                   >
-                    <User className="text-white"  size={17} />
-                    
+                    <User className="text-white" size={17} />
                   </button>
                 )}
               </>
@@ -410,10 +411,9 @@ export default function Navbar() {
               {/* ── Mobile auth section ──────────────────────────────────── */}
               {!loading && (
                 <>
-                  {user ? (
-                    // Logged in mobile
+                  {user && (
                     <div className="mt-2 pt-2 border-t border-gray-100">
-                      {/* User info pill */}
+                      {/* User info */}
                       <div className="flex items-center gap-3 px-1 py-2 mb-2">
                         <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#004835] to-[#004835]/60 flex items-center justify-center text-white font-bold text-sm">
                           {user.name?.[0]?.toUpperCase()}
@@ -428,15 +428,39 @@ export default function Navbar() {
                         </div>
                       </div>
 
+                      {/* My Dashboard — always shown */}
                       <Link
-                        href={isAdmin ? "/admin" : "/dashboard"}
+                        href="/dashboard"
                         onClick={() => setMenuOpen(false)}
                         className="flex items-center gap-3 py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
                       >
                         <LayoutDashboard size={16} className="text-[#004835]" />
-                        {isAdmin ? "Admin Panel" : "My Dashboard"}
+                        My Dashboard
                       </Link>
 
+                      {/* My Properties */}
+                      <Link
+                        href="/dashboard/properties"
+                        onClick={() => setMenuOpen(false)}
+                        className="flex items-center gap-3 py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
+                      >
+                        <Building2 size={16} className="text-[#004835]" />
+                        My Properties
+                      </Link>
+
+                      {/* Admin Panel — only for admins */}
+                      {isAdmin && (
+                        <Link
+                          href="/admin"
+                          onClick={() => setMenuOpen(false)}
+                          className="flex items-center gap-3 py-3 text-gray-700 hover:text-[#004835] font-semibold border-b border-gray-50 text-[15px]"
+                        >
+                          <Shield size={16} className="text-amber-500" />
+                          Admin Panel
+                        </Link>
+                      )}
+
+                      {/* Sign Out */}
                       <button
                         onClick={() => {
                           handleLogout();
@@ -448,18 +472,6 @@ export default function Navbar() {
                         Sign Out
                       </button>
                     </div>
-                  ) : (
-                    // Not logged in mobile
-                    <button
-                      onClick={() => {
-                        openLogin();
-                        setMenuOpen(false);
-                      }}
-                      className="mt-3 w-full flex items-center justify-center gap-2 py-3 border-2 border-[#004835] text-[#004835] font-semibold text-[14px] rounded-full hover:bg-[#004835]/5 transition-colors"
-                    >
-                      <LogIn size={16} />
-                      Sign In
-                    </button>
                   )}
                 </>
               )}

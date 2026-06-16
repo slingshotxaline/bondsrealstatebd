@@ -10,17 +10,28 @@ import {
   X,
   Loader2,
 } from "lucide-react";
-import Link from "next/link";
 import { propertyAPI } from "@/app/lib/api";
 import FilterSidebar from "./FilterSidebar";
 import PropertyCard from "./PropertyCard";
-
 
 const SORT_OPTIONS = [
   { value: "newest", label: "Latest First" },
   { value: "price_asc", label: "Price: Low to High" },
   { value: "price_desc", label: "Price: High to Low" },
+  { value: "views", label: "Most Viewed" },
 ];
+
+const DEFAULT_FILTERS = {
+  keyword: "",
+  listingType: "all",
+  propertyType: "",
+  propertyCategory: "",
+  city: "",
+  area: "",
+  minPrice: "",
+  maxPrice: "",
+  amenities: [],
+};
 
 export default function PropertyBuySellPublicPage() {
   const [properties, setProperties] = useState([]);
@@ -31,33 +42,34 @@ export default function PropertyBuySellPublicPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [page, setPage] = useState(1);
 
-  // Filter state — matches FilterSidebar fields
-  const [filters, setFilters] = useState({
-    keyword: "",
-    listingType: "all", // Sale | Rent | all
-    city: "",
-    area: "",
-    minPrice: "",
-    maxPrice: "",
-    propertyCategory: "",
-  });
-  const [activeFilters, setActiveFilters] = useState(filters);
+  const [filters, setFilters] = useState(DEFAULT_FILTERS);
+  const [activeFilters, setActiveFilters] = useState(DEFAULT_FILTERS);
 
   const fetchProperties = useCallback(async () => {
     setLoading(true);
     try {
       const params = new URLSearchParams({ page, limit: 9, sort: sortBy });
-      if (activeFilters.listingType !== "all")
+
+      // ── Map every filter field to API query param ──────────────────────────
+      if (activeFilters.listingType && activeFilters.listingType !== "all") {
         params.set("listingType", activeFilters.listingType);
+      }
+      if (activeFilters.propertyType)
+        params.set("propertyType", activeFilters.propertyType);
+      if (activeFilters.propertyCategory)
+        params.set("propertyCategory", activeFilters.propertyCategory);
       if (activeFilters.city) params.set("city", activeFilters.city);
       if (activeFilters.area) params.set("area", activeFilters.area);
       if (activeFilters.minPrice)
         params.set("minPrice", activeFilters.minPrice);
       if (activeFilters.maxPrice)
         params.set("maxPrice", activeFilters.maxPrice);
-      if (activeFilters.propertyCategory)
-        params.set("propertyCategory", activeFilters.propertyCategory);
       if (activeFilters.keyword) params.set("search", activeFilters.keyword);
+
+      // Amenities — backend expects ?amenities=Gym&amenities=Parking
+      (activeFilters.amenities || []).forEach((a) =>
+        params.append("amenities", a)
+      );
 
       const data = await propertyAPI.getAll(params.toString());
       setProperties(data.data || []);
@@ -75,24 +87,28 @@ export default function PropertyBuySellPublicPage() {
 
   const handleSearch = () => {
     setPage(1);
-    setActiveFilters(filters);
+    setActiveFilters({ ...filters });
     setSidebarOpen(false);
   };
 
   const handleClear = () => {
-    const empty = {
-      keyword: "",
-      listingType: "all",
-      city: "",
-      area: "",
-      minPrice: "",
-      maxPrice: "",
-      propertyCategory: "",
-    };
-    setFilters(empty);
-    setActiveFilters(empty);
+    setFilters(DEFAULT_FILTERS);
+    setActiveFilters(DEFAULT_FILTERS);
     setPage(1);
   };
+
+  // Count active filters for badge
+  const activeFilterCount = [
+    activeFilters.listingType && activeFilters.listingType !== "all",
+    activeFilters.propertyType,
+    activeFilters.propertyCategory,
+    activeFilters.city,
+    activeFilters.area,
+    activeFilters.minPrice,
+    activeFilters.maxPrice,
+    activeFilters.keyword,
+    ...(activeFilters.amenities || []),
+  ].filter(Boolean).length;
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-['Sora',_sans-serif] mt-16">
@@ -102,7 +118,7 @@ export default function PropertyBuySellPublicPage() {
         <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-50/60 rounded-full blur-3xl" />
       </div>
 
-      {/* Mobile sidebar */}
+      {/* Mobile sidebar drawer */}
       <AnimatePresence>
         {sidebarOpen && (
           <>
@@ -178,18 +194,35 @@ export default function PropertyBuySellPublicPage() {
                 {loading
                   ? "Searching..."
                   : `${pagination.total || 0} properties found`}
+                {activeFilterCount > 0 && !loading && (
+                  <button
+                    onClick={handleClear}
+                    className="ml-2 text-amber-500 hover:underline text-xs"
+                  >
+                    Clear {activeFilterCount} filter
+                    {activeFilterCount > 1 ? "s" : ""} ×
+                  </button>
+                )}
               </p>
             </div>
 
             {/* Controls */}
             <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+              {/* Mobile filter button with badge */}
               <button
                 onClick={() => setSidebarOpen(true)}
-                className="lg:hidden flex items-center gap-2 px-3 py-2 bg-amber-500 text-white text-xs font-semibold rounded-xl hover:bg-amber-400 transition-colors"
+                className="lg:hidden flex items-center gap-2 px-3 py-2 bg-amber-500 text-white text-xs font-semibold rounded-xl hover:bg-amber-400 transition-colors relative"
               >
-                <SlidersHorizontal size={13} /> Filters
+                <SlidersHorizontal size={13} />
+                Filters
+                {activeFilterCount > 0 && (
+                  <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-red-500 text-white text-[9px] font-bold flex items-center justify-center">
+                    {activeFilterCount}
+                  </span>
+                )}
               </button>
 
+              {/* Grid / List toggle */}
               <div className="flex items-center gap-1.5 bg-gray-100 border border-gray-200 rounded-xl p-1">
                 <button
                   onClick={() => setIsGrid(true)}
@@ -213,6 +246,7 @@ export default function PropertyBuySellPublicPage() {
                 </button>
               </div>
 
+              {/* Sort */}
               <div className="flex items-center gap-2 bg-gray-100 border border-gray-200 rounded-xl px-3 py-2">
                 <ArrowUpDown size={13} className="text-amber-500" />
                 <select
@@ -236,7 +270,7 @@ export default function PropertyBuySellPublicPage() {
 
         {/* Layout */}
         <div className="flex gap-6 items-start">
-          {/* Desktop sidebar */}
+          {/* Desktop sidebar — sticky */}
           <div
             className="hidden lg:flex w-72 flex-shrink-0 flex-col"
             style={{
@@ -273,9 +307,17 @@ export default function PropertyBuySellPublicPage() {
                 <h3 className="text-gray-800 font-semibold mb-2">
                   No properties found
                 </h3>
-                <p className="text-gray-400 text-sm">
+                <p className="text-gray-400 text-sm mb-4">
                   Try adjusting your search filters
                 </p>
+                {activeFilterCount > 0 && (
+                  <button
+                    onClick={handleClear}
+                    className="px-4 py-2 bg-amber-500 text-white text-sm font-semibold rounded-xl hover:bg-amber-400 transition-colors"
+                  >
+                    Clear all filters
+                  </button>
+                )}
               </motion.div>
             ) : (
               <>

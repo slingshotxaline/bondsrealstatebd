@@ -107,7 +107,7 @@ export default function AdminPropertiesPage() {
           </div>
         </div>
 
-        <Link href="/dashboard/properties/new">
+        <Link href="/dashboard/properties/add-property">
           <button className="flex items-center gap-2 px-4 py-2.5 bg-[#004835] text-white text-sm font-semibold rounded-xl hover:bg-[#003828] transition-colors whitespace-nowrap">
             <Plus size={14} /> Add Property
           </button>

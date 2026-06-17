@@ -1,5 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
+import { useAuth } from "@/app/context/AuthContext";
+import { useAuthModal } from "@/app/context/AuthModalContext";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   LayoutGrid,
@@ -35,6 +37,8 @@ const DEFAULT_FILTERS = {
 
 export default function PropertyBuySellPublicPage() {
   const [properties, setProperties] = useState([]);
+  const { user, loading: authLoading } = useAuth();
+  const { setShowModal, setModalType } = useAuthModal();
   const [pagination, setPagination] = useState({});
   const [loading, setLoading] = useState(true);
   const [isGrid, setIsGrid] = useState(true);
@@ -84,6 +88,8 @@ export default function PropertyBuySellPublicPage() {
   useEffect(() => {
     fetchProperties();
   }, [fetchProperties]);
+
+
 
   const handleSearch = () => {
     setPage(1);

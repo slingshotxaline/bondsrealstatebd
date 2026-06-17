@@ -295,7 +295,7 @@ export default function Footer() {
     <footer className="bg-[#141414] text-white relative overflow-hidden">
       <AnimatedBackground />
 
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 py-20">
+      <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16">
           {/* ── Quick Links ── */}
           <motion.div
@@ -593,7 +593,7 @@ export default function Footer() {
       </div>
 
       {/* ── Watermark ── */}
-      {/* <div className="relative h-28 overflow-hidden">
+      <div className="relative h-12 overflow-hidden">
         <motion.div
           className="absolute bottom-0 left-1/2 -translate-x-1/2 opacity-[0.04] select-none pointer-events-none"
           animate={{ opacity: [0.03, 0.06, 0.03] }}
@@ -603,10 +603,10 @@ export default function Footer() {
             className="text-[28px] md:text-[48px] font-bold italic text-white leading-none whitespace-nowrap"
             style={{ fontFamily: "'Georgia', serif" }}
           >
-            Bonds Real Estates
+            Bonds Real Estate Ltd.
           </span>
         </motion.div>
-      </div> */}
+      </div>
     </footer>
   );
 }

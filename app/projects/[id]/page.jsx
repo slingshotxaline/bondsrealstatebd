@@ -22,7 +22,7 @@ export async function generateMetadata({ params }) {
   const project = await getProject(id);
   if (!project) return {};
   return {
-    title: `${project.title} | BONDS Real Estate`,
+    title: `${project.title} | BONDS Real Estate Ltd.`,
     description: project.description?.slice(0, 160),
     openGraph: {
       images: project.mainImage?.url ? [project.mainImage.url] : [],

@@ -31,7 +31,7 @@ export async function generateMetadata({ params }) {
   const property = await getPropertyBySlug(slug);
   if (!property) return {};
   return {
-    title:       `${property.title} | BONDS Real Estate`,
+    title:       `${property.title} | BONDS Real Estate Ltd.`,
     description: property.description?.slice(0, 160),
     openGraph: {
       title:       property.title,

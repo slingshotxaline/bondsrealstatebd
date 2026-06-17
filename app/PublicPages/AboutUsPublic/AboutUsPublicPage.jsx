@@ -203,7 +203,7 @@ export default function AboutUs() {
                 viewport={{ once: true, amount: 0.2 }}
                 className="mt-6 text-gray-600 leading-8"
               >
-                Bonds Real Estate is driven by a commitment to modern urban
+                Bonds Real Estate Ltd. is driven by a commitment to modern urban
                 living, combining innovative planning, premium construction
                 standards, and sustainable development principles.
               </motion.p>

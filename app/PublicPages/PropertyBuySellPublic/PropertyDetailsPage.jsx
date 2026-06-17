@@ -28,6 +28,8 @@ import {
 } from "lucide-react";
 import { propertyAPI } from "@/app/lib/api";
 import { useAuth } from "@/app/context/AuthContext";
+import { useAuthModal } from "@/app/context/AuthModalContext";
+
 
 function formatPrice(price, listingType) {
   if (listingType === "Rent") return `৳ ${price?.toLocaleString()} /mo`;
@@ -84,6 +86,7 @@ function Lightbox({ images, index, onClose }) {
 // ── Contact / Inquiry Form ────────────────────────────────────────────────────
 function ContactForm({ property }) {
   const { user } = useAuth();
+  const { setShowModal, setModalType } = useAuthModal();
   const [form, setForm] = useState({
     name: user?.name || "",
     email: user?.email || "",
@@ -99,6 +102,12 @@ function ContactForm({ property }) {
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const handleSubmit = async () => {
+    if (!user) {
+      setModalType("login");
+      setShowModal(true);
+      return;
+    }
+
     if (!form.name || !form.phone || !form.email || !form.message) {
       setError("Name, phone, email and message are required.");
       return;
@@ -257,17 +266,22 @@ function ContactForm({ property }) {
 
       {/* Buttons */}
       <div className="flex gap-2">
-        <a
-          href={`https://wa.me/88${property.ownerPhone?.replace(
-            /^0/,
-            ""
-          )}?text=${encodeURIComponent(form.message)}`}
-          target="_blank"
-          rel="noopener noreferrer"
+      <button
+          onClick={() => {
+            if (!user) {
+              setModalType("login");
+              setShowModal(true);
+              return;
+            }
+            window.open(
+              `https://wa.me/88${property.ownerPhone?.replace(/^0/, "")}?text=${encodeURIComponent(form.message)}`,
+              "_blank"
+            );
+          }}
           className="flex-1 flex items-center justify-center gap-2 py-3 bg-emerald-500 hover:bg-emerald-400 text-white font-bold text-sm rounded-xl transition-all active:scale-95"
         >
           <MessageCircle size={15} /> WHATSAPP
-        </a>
+        </button>
         <button
           onClick={handleSubmit}
           disabled={loading}

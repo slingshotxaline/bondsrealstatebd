@@ -13,8 +13,8 @@ import {
   Loader2,
 } from "lucide-react";
 import { propertyAPI } from "@/app/lib/api";
-import FilterSidebar from "./FilterSidebar";
 import PropertyCard from "./PropertyCard";
+import FilterSidebar from "./FilterSidebar";
 
 const SORT_OPTIONS = [
   { value: "newest", label: "Latest First" },
@@ -23,9 +23,12 @@ const SORT_OPTIONS = [
   { value: "views", label: "Most Viewed" },
 ];
 
+// This page is locked to Rent listings only
+const LOCKED_LISTING_TYPE = "Rent";
+
 const DEFAULT_FILTERS = {
   keyword: "",
-  listingType: "Sale",
+  listingType: LOCKED_LISTING_TYPE,
   propertyType: "",
   propertyCategory: "",
   city: "",
@@ -35,7 +38,7 @@ const DEFAULT_FILTERS = {
   amenities: [],
 };
 
-export default function PropertyBuySellPublicPage() {
+export default function PropertyManagementPublicPage() {
   const [properties, setProperties] = useState([]);
   const { user, loading: authLoading } = useAuth();
   const { setShowModal, setModalType } = useAuthModal();
@@ -54,10 +57,9 @@ export default function PropertyBuySellPublicPage() {
     try {
       const params = new URLSearchParams({ page, limit: 9, sort: sortBy });
 
-      // ── Map every filter field to API query param ──────────────────────────
-      if (activeFilters.listingType && activeFilters.listingType !== "all") {
-        params.set("listingType", activeFilters.listingType);
-      }
+      // Always Rent on this page, regardless of any stray filter state
+      params.set("listingType", LOCKED_LISTING_TYPE);
+
       if (activeFilters.propertyType)
         params.set("propertyType", activeFilters.propertyType);
       if (activeFilters.propertyCategory)
@@ -89,11 +91,9 @@ export default function PropertyBuySellPublicPage() {
     fetchProperties();
   }, [fetchProperties]);
 
-
-
   const handleSearch = () => {
     setPage(1);
-    setActiveFilters({ ...filters });
+    setActiveFilters({ ...filters, listingType: LOCKED_LISTING_TYPE });
     setSidebarOpen(false);
   };
 
@@ -103,9 +103,8 @@ export default function PropertyBuySellPublicPage() {
     setPage(1);
   };
 
-  // Count active filters for badge
+  // Count active filters for badge (listingType excluded since it's locked)
   const activeFilterCount = [
-    activeFilters.listingType && activeFilters.listingType !== "all",
     activeFilters.propertyType,
     activeFilters.propertyCategory,
     activeFilters.city,
@@ -156,6 +155,7 @@ export default function PropertyBuySellPublicPage() {
                   setFilters={setFilters}
                   onSearch={handleSearch}
                   onClear={handleClear}
+                  lockListingType={LOCKED_LISTING_TYPE}
                 />
               </div>
             </motion.div>
@@ -172,7 +172,7 @@ export default function PropertyBuySellPublicPage() {
         >
           {/* Breadcrumb */}
           <div className="flex items-center gap-1.5 text-xs text-gray-400 mb-4 flex-wrap">
-            {["Home", "Properties", "All Listings"].map((b, i, arr) => (
+            {["Home", "Properties", "For Rent"].map((b, i, arr) => (
               <span key={b} className="flex items-center gap-1.5">
                 <span
                   className={
@@ -193,8 +193,7 @@ export default function PropertyBuySellPublicPage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
               <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
-                Find Your <span className="text-amber-500">Perfect</span>{" "}
-                Property
+                Properties For <span className="text-amber-500">Rent</span>
               </h1>
               <p className="text-gray-500 text-sm">
                 {loading
@@ -291,6 +290,7 @@ export default function PropertyBuySellPublicPage() {
               setFilters={setFilters}
               onSearch={handleSearch}
               onClear={handleClear}
+              lockListingType={LOCKED_LISTING_TYPE}
             />
           </div>
 

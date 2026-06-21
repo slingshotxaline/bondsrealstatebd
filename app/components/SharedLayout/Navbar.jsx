@@ -19,7 +19,7 @@ import {
 
 const propertySolutions = [
   { label: "Property Buy/Sell", href: "property-buy-sell", icon: "🏠" },
-  { label: "Property Management", href: "#services", icon: "🔑" },
+  { label: "Property Management", href: "property-management", icon: "🔑" },
   { label: "Property Development", href: "#development", icon: "🏗️" },
 ];
 

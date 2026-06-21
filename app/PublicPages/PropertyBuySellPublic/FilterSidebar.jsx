@@ -65,6 +65,7 @@ export default function FilterSidebar({
   setFilters,
   onSearch,
   onClear,
+  lockListingType, // e.g. "Rent" or "Sale" — hides the toggle and forces this value
 }) {
   const [openSections, setOpenSections] = useState({
     listingType: true,
@@ -120,34 +121,36 @@ export default function FilterSidebar({
           />
         </div>
 
-        {/* Listing Type — Sale / Rent */}
-        <Section
-          id="listingType"
-          label="I want to"
-          openSections={openSections}
-          toggle={toggle}
-        >
-          <div className="flex gap-2">
-            {[
-              { label: "All", value: "all" },
-              { label: "Buy", value: "Sale" },
-              { label: "Rent", value: "Rent" },
-            ].map(({ label, value }) => (
-              <button
-                key={value}
-                onClick={() => set("listingType")(value)}
-                className={`flex-1 py-2 rounded-xl text-xs font-semibold transition-all
-                  ${
-                    filters.listingType === value
-                      ? "bg-amber-500 text-white shadow-sm shadow-amber-200"
-                      : "bg-gray-50 text-gray-500 hover:text-gray-800 border border-gray-200 hover:border-gray-300"
-                  }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-        </Section>
+        {/* Listing Type — Sale / Rent — hidden when locked */}
+        {!lockListingType && (
+          <Section
+            id="listingType"
+            label="I want to"
+            openSections={openSections}
+            toggle={toggle}
+          >
+            <div className="flex gap-2">
+              {[
+                { label: "All", value: "all" },
+                { label: "Buy", value: "Sale" },
+                { label: "Rent", value: "Rent" },
+              ].map(({ label, value }) => (
+                <button
+                  key={value}
+                  onClick={() => set("listingType")(value)}
+                  className={`flex-1 py-2 rounded-xl text-xs font-semibold transition-all
+                    ${
+                      filters.listingType === value
+                        ? "bg-amber-500 text-white shadow-sm shadow-amber-200"
+                        : "bg-gray-50 text-gray-500 hover:text-gray-800 border border-gray-200 hover:border-gray-300"
+                    }`}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          </Section>
+        )}
 
         {/* Property Type — Residential / Commercial */}
         <Section
@@ -357,7 +360,8 @@ export default function FilterSidebar({
         {/* Active filters summary */}
         {(() => {
           const active = [
-            filters.listingType &&
+            !lockListingType &&
+              filters.listingType &&
               filters.listingType !== "all" &&
               filters.listingType,
             filters.propertyType && filters.propertyType,
